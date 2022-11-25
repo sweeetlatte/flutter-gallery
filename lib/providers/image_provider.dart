@@ -11,6 +11,12 @@ class MyImageProvider extends ChangeNotifier {
     return [..._images];
   }
 
+  List<MyImage> showItemFavorite() {
+    List<MyImage> data =
+        _images.where((element) => element.isFavorite).toList();
+    return data.isEmpty ? [] : data;
+  }
+
   void readJson() async {
     final String response =
         await rootBundle.loadString('assets/json/images.json');

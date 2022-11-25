@@ -5,11 +5,13 @@ import 'package:gallery/providers/image_provider.dart';
 import 'package:provider/provider.dart';
 
 class SwipeImages extends StatelessWidget {
-  const SwipeImages({Key? key}) : super(key: key);
+  const SwipeImages({Key? key, required this.isFavorite}) : super(key: key);
+  final isFavorite;
 
   @override
   Widget build(BuildContext context) {
-    final images = Provider.of<MyImageProvider>(context).images;
+    final dataImage = Provider.of<MyImageProvider>(context);
+    final images = isFavorite ? dataImage.showItemFavorite() : dataImage.images;
 
     return Swiper(
       layout: SwiperLayout.STACK,

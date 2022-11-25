@@ -12,33 +12,63 @@ void main() {
       )));
 }
 
-class MyApp extends StatelessWidget {
+enum categoryOption { all, favorite }
+
+class MyApp extends StatefulWidget {
   MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isFavorite = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<MyImageProvider>(context, listen: false).readJson();
+  }
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Provider.of<MyImageProvider>(context, listen: false).readJson();
     return Scaffold(
       backgroundColor: const Color(0xff010204),
       appBar: AppBar(
-        title: const Text('Gallery',
-            style: TextStyle(
+        title: Text(isFavorite ? 'Favorite' : 'Gallery',
+            style: const TextStyle(
                 fontSize: 32, fontWeight: FontWeight.w400, letterSpacing: 5)),
         backgroundColor: const Color(0xff010204),
         elevation: 0,
         actions: [
           PopupMenuButton(
+              onSelected: (value) {
+                setState(() {
+                  if (value == categoryOption.favorite)
+                    isFavorite = true;
+                  else
+                    isFavorite = false;
+                });
+              },
               icon: const Icon(
                 Icons.more_vert,
               ),
               itemBuilder: (_) => [
-                    const PopupMenuItem(child: Text('All')),
-                    const PopupMenuItem(child: Text('Favorites'))
+                    const PopupMenuItem(
+                      child: Text('All'),
+                      value: categoryOption.all,
+                    ),
+                    const PopupMenuItem(
+                      child: Text('Favorites'),
+                      value: categoryOption.favorite,
+                    )
                   ])
         ],
       ),
-      body: const SwipeImages(),
+      body: SwipeImages(
+        isFavorite: isFavorite,
+      ),
     );
   }
 }
