@@ -52,10 +52,11 @@ class _MyAppState extends State<MyApp> {
           PopupMenuButton(
               onSelected: (value) {
                 setState(() {
-                  if (value == categoryOption.favorite)
+                  if (value == categoryOption.favorite) {
                     isFavorite = true;
-                  else
+                  } else {
                     isFavorite = false;
+                  }
                 });
               },
               icon: const Icon(
@@ -63,12 +64,12 @@ class _MyAppState extends State<MyApp> {
               ),
               itemBuilder: (_) => [
                     const PopupMenuItem(
-                      child: Text('All'),
                       value: categoryOption.all,
+                      child: Text('All'),
                     ),
                     const PopupMenuItem(
-                      child: Text('Favorites'),
                       value: categoryOption.favorite,
+                      child: Text('Favorites'),
                     )
                   ])
         ],

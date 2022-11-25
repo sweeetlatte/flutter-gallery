@@ -24,6 +24,7 @@ class MyImageProvider extends ChangeNotifier {
 
   void handleCountFavorites() {
     _countFavorites = _images.where((element) => element.isFavorite).length;
+    notifyListeners();
   }
 
   void readJson() async {

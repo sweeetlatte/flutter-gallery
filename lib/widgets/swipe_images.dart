@@ -55,7 +55,7 @@ class SwipeImages extends StatelessWidget {
             },
           )
         : Container(
-            child: Center(
+            child: const Center(
                 child: Text(
               'No favorite image(s) to show',
               style: TextStyle(color: Colors.white),
