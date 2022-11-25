@@ -36,9 +36,16 @@ class _MyAppState extends State<MyApp> {
     return Scaffold(
       backgroundColor: const Color(0xff010204),
       appBar: AppBar(
-        title: Text(isFavorite ? 'Favorite' : 'Gallery',
-            style: const TextStyle(
-                fontSize: 32, fontWeight: FontWeight.w400, letterSpacing: 5)),
+        title: Consumer<MyImageProvider>(
+          builder: (context, image, child) {
+            return Text(
+                isFavorite ? 'Favorites (${image.countFavorites})' : 'Gallery',
+                style: const TextStyle(
+                    fontSize: 32,
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 5));
+          },
+        ),
         backgroundColor: const Color(0xff010204),
         elevation: 0,
         actions: [
