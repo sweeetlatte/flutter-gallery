@@ -15,9 +15,9 @@ class MyImageProvider extends ChangeNotifier {
     final String response =
         await rootBundle.loadString('assets/json/images.json');
     final parsedList = await json.decode(response);
-    List<MyImage> ListData = List<MyImage>.from(
+    List<MyImage> listData = List<MyImage>.from(
         parsedList.map((data) => MyImage.fromJson(jsonEncode(data))).toList());
-    _images = ListData;
+    _images = listData;
     notifyListeners();
   }
 }

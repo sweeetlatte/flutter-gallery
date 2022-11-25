@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gallery/modal/item_modal.dart';
 import 'package:gallery/providers/image_provider.dart';
 import 'package:gallery/widgets/swipe_images.dart';
 import 'package:provider/provider.dart';
@@ -39,7 +38,7 @@ class MyApp extends StatelessWidget {
                   ])
         ],
       ),
-      body: SwipeImages(),
+      body: const SwipeImages(),
     );
   }
 }

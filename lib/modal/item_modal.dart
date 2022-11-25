@@ -1,11 +1,19 @@
 import 'dart:convert';
 
-class MyImage {
+import 'package:flutter/material.dart';
+
+class MyImage extends ChangeNotifier {
   String id;
   String name;
   String image;
+  bool isFavorite = false;
 
   MyImage({required this.id, required this.name, required this.image});
+
+  void toggleIsFavorite() {
+    isFavorite = !isFavorite;
+    notifyListeners();
+  }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{'id': id, 'name': name, 'image': image};
