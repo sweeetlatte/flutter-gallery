@@ -23,27 +23,36 @@ class SwipeImages extends StatelessWidget {
               return ChangeNotifierProvider.value(
                 value: images[index],
                 child: GridTile(
-                  footer: GridTileBar(
-                    backgroundColor: Colors.black54,
-                    leading: Consumer<MyImage>(
-                      builder: (context, image, child) {
-                        return InkWell(
-                            onTap: () {
-                              image.toggleIsFavorite();
-                              Provider.of<MyImageProvider>(context,
-                                      listen: false)
-                                  .handleCountFavorites();
-                            },
-                            child: Icon(
-                                image.isFavorite
-                                    ? Icons.favorite
-                                    : Icons.favorite_border_sharp,
-                                size: 32));
-                      },
+                  footer: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.black, Color.fromRGBO(0, 0, 0, 0)],
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.topCenter,
+                        tileMode: TileMode.clamp,
+                      ),
                     ),
-                    title: Text(
-                      images[index].name,
-                      style: const TextStyle(color: Colors.white70),
+                    child: GridTileBar(
+                      leading: Consumer<MyImage>(
+                        builder: (context, image, child) {
+                          return InkWell(
+                              onTap: () {
+                                image.toggleIsFavorite();
+                                Provider.of<MyImageProvider>(context,
+                                        listen: false)
+                                    .handleCountFavorites();
+                              },
+                              child: Icon(
+                                  image.isFavorite
+                                      ? Icons.favorite
+                                      : Icons.favorite_border_sharp,
+                                  size: 32));
+                        },
+                      ),
+                      title: Text(
+                        images[index].name,
+                        style: const TextStyle(color: Colors.white70),
+                      ),
                     ),
                   ),
                   child: Image.asset(
@@ -54,12 +63,10 @@ class SwipeImages extends StatelessWidget {
               );
             },
           )
-        : Container(
-            child: const Center(
-                child: Text(
-              'No favorite image(s) to show',
-              style: TextStyle(color: Colors.white),
-            )),
-          );
+        : const Center(
+            child: Text(
+            'No favorite image(s) to show',
+            style: TextStyle(color: Colors.white),
+          ));
   }
 }
